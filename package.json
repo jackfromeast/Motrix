@@ -24,7 +24,7 @@
     "build:web": "cross-env BUILD_TARGET=web node .electron-vue/build.js",
     "dev": "node .electron-vue/dev-runner.js",
     "dev:renderer": "webpack serve --node-env development --hot --color --config .electron-vue/webpack.renderer.config.js --port 9080 --content-base app/dist",
-    "proton": "cross-env NODE_ENV=development node .electron-vue/dev-runner.js & sleep 10 && /Users/jackfromeast/Desktop/electron/proton-build-app/electron38/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron --inspect-brk=9229 --remote-debugging-port=9222 ./dist/electron/main.js",
+    "proton": "cross-env NODE_ENV=development SKIP_ELECTRON=1 node .electron-vue/dev-runner.js & sleep 10 && /Users/jackfromeast/Desktop/electron/proton-build-app/electron38/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron --inspect-brk=9229 --remote-debugging-port=9222 ./dist/electron/main.js",
     "lint": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter src",
     "lint:fix": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter --fix src",
     "pack": "npm run pack:main && npm run pack:renderer",

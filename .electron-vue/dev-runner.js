@@ -76,7 +76,7 @@ function startMain () {
 
       logStats('Main', stats)
 
-      if (electronProcess && electronProcess.kill) {
+      if (!process.env.SKIP_ELECTRON && electronProcess && electronProcess.kill) {
         manualRestart = true
         process.kill(electronProcess.pid)
         electronProcess = null
@@ -151,7 +151,12 @@ function init () {
 
   Promise.all([startRenderer(), startMain()])
     .then(() => {
-      startElectron()
+      if (!process.env.SKIP_ELECTRON) {
+        startElectron()
+      } else {
+        console.log(chalk.green('\n  Skipping Electron auto-start (SKIP_ELECTRON is set)'))
+        console.log(chalk.yellow('  You can now start Electron manually with your custom binary\n'))
+      }
     })
     .catch(err => {
       console.error(err)
